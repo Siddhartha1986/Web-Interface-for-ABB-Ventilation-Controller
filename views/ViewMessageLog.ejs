@@ -1,0 +1,57 @@
+<%- include('header') -%>
+
+<script type="text/javascript">
+    function formatDate(date) {
+        var d = new Date(date.value),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+        return [year, month, day].join('-');
+    }
+</script>
+<div class="container-fluid">
+    <h3>System Message Logs <%= model.lentgh%></h3>
+    <form action="/route/ShowMessageLog" method="POST" class="pt-3">
+        <b>From Date:</b>
+        <input id="txtfdate" type="text" name="fromDate" placeholder="YYYY-MM-DD"
+            onkeypress="formatDate(document.getElementById('txtfdate'))"
+            value="<%= locals.fdate!=="" ? locals.fdate : '' %>" style="width: 15%;">
+        <b>To Date:</b>
+        <input id="txttdate" type="text" name="toDate" placeholder="YYYY-MM-DD"
+            onkeypress="formatDate(document.getElementById('txttdate'))"
+            value="<%= locals.tdate!=="" ? locals.tdate : '' %>" style="width: 15%;"><br>
+        <button class="btn btn-primary" id="sidebarToggle">View</button>
+    </form>
+    <table id='tblAccessLog' class="table" style="width:100%">
+        <thead>
+            <td>Speed(%)</td>
+            <td>Pressure(Pa)</td>
+            <td>Temperature</td>
+            <td>Co2</td>
+            <td>RH</td>
+            <td>ReceivedOn</td>
+            <td>User</td>
+        </thead>
+        <% if(locals.count>0){ %>
+        <% for (const book of model) { %>
+        <tr>
+            <td><%= book.speed %></td>
+            <td><%= book.pressure %></td>
+            <td><%= book.temperature %></td>
+            <td><%= book.co2 %></td>
+            <td><%= book.rh %></td>
+            <td><%= book.createdOn %></td>
+            <td><%= book.name %></td>
+        </tr>
+        <% }} %>
+    </table>
+</div>
+<script type="text/javascript">
+    $(document).ready( function () {
+    $('#tblAccessLog').DataTable();
+} );
+</script>
+
+<%- include('footer') -%>

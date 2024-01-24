@@ -1,0 +1,98 @@
+<%- include('header') -%>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    //for hiding control in initial load
+    var modeval = $('input[name="Mode"]:checked').val();
+    if (modeval == "Speed") {
+      $('#setPointPressure').attr('disabled', true);
+      $("#setPointPressure").hide();
+      $('#setPointSpeed').attr('disabled', false);
+      $("#setPointSpeed").show();
+
+    } else {
+      $('#setPointPressure').attr('disabled', false);
+      $("#setPointPressure").show();
+      $('#setPointSpeed').attr('disabled', true);
+      $("#setPointSpeed").hide();
+
+    }
+
+    $('#setPointSpeed').on('input', function () {
+      v = $('#setPointSpeed').val();
+      $('div.point').text(v);
+    });
+    $('#setPointPressure').on('input', function () {
+      v = $('#setPointPressure').val();
+      $('div.point').text(v);
+    });
+    //Chnage on moode selection
+    $('input:radio').change(function () {
+      var modeval = $('input[name="Mode"]:checked').val();
+      if (modeval == "Speed") {
+        $('#setPointPressure').attr('disabled', true);
+        $("#setPointPressure").hide();
+        $('#setPointSpeed').attr('disabled', false);
+        $("#setPointSpeed").show();
+      } else {
+        $('#setPointPressure').attr('disabled', false);
+        $("#setPointPressure").show();
+        $('#setPointSpeed').attr('disabled', true);
+        $("#setPointSpeed").hide();
+      }
+    })
+  });
+</script>
+<div class="container-fluid">
+  <form action="/setVentSettings" method="post">
+    <div class="col-sm-6">
+      <label for="exampleFormControlInput1" class="form-label">Server</label>
+      <input type="text" class="form-control" id="txtServer" value="<%= locals.getServer %>" name='server'
+             placeholder="localhost">
+    </div>
+    <div class="col-sm-6">
+      <label for="exampleFormControlInput1" class="form-label">Port</label>
+      <input type="text" class="form-control" id="txtPort" value="<%= locals.getPort %>" name='port' placeholder="1881">
+    </div>
+    <div class="col-sm-6">
+      <label for="exampleFormControlInput1" class="form-label">Publisher Text</label>
+      <input type="text" class="form-control" id="txtPublisher" value="<%= locals.getPublishText %>" name='publisher'
+             placeholder="Text to publish">
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Subscriber Text</label>
+      <input type="Text to subscribe" class="form-control" id="txtSubscriber" value="<%= locals.getSubscriberText %>"
+             name='subscriber' placeholder="Text to subscriber">
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="Mode" id="RadioPressure" value="Pressure"
+              <%= getMode==="Pressure" ? 'checked' : '' %>>
+      <label class="form-check-label" for="RadioPressure">
+        Pressure(Auto Mode)
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="Mode" id="RadioSpeed" value="Speed"
+              <%= getMode==="Speed" ? 'checked' : '' %>>
+      <label class="form-check-label" for="RadioSpeed">
+        Speed(Manual Mode)
+      </label>
+    </div>
+
+    <div class="form-group col-sm-6 ">
+      <label for="point">
+        <h4>Set Point</h4>
+      </label>
+      <div class="point text-center"><%= locals.getPoint!=="" ? locals.getPoint : '50' %>
+      </div>
+      <input type="range" class="custom-range" min="0" max="100" step="1" id="setPointSpeed" name="setPoint"
+             value="<%= locals.getPoint %>" style="width: 100%">
+      <input type="range" class="custom-range" min="0" max="140" step="1" id="setPointPressure" name="setPoint"
+             value="<%= locals.getPoint %>" style="width: 100%">
+    </div>
+    <button class="btn btn-primary" id="sidebarToggle">Set</button></br>
+  </form>
+</div>
+
+<%- include('footer') -%>

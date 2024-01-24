@@ -1,0 +1,29 @@
+<%- include('header') -%>
+<div class="container-fluid">
+    <h3>System Access Logs</h3>   
+<table id='tblAccessLog' class="table" style="width:100%">  
+<thead>  
+<td>UserId</td>  
+<td>Name</td>  
+<td>Email</td> 
+<td>Action</td>   
+<td>Action on</td> 
+</thead>  
+<% for (const book of model) { %> 
+<tr>  
+<td><%= book.userid %></td>  
+<td><%= book.name %></td>  
+<td><%= book.email %></td> 
+<td><%= book.action %></td> 
+<td><%= book.action_on %></td>  
+</tr>  
+<% } %> 
+</table> 
+</div>
+<script type="text/javascript">
+    $(document).ready( function () {
+    $('#tblAccessLog').DataTable();
+} );
+</script>
+
+<%- include('footer') -%>

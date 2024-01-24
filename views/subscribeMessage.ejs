@@ -1,0 +1,20 @@
+<%- include('header') -%>
+
+<div class="container-fluid">
+  <p class="clearfix"> </p>
+  <div class="row">
+    <form id="connection-info-form">
+      <b>Hostname or IP Address:</b>
+      <input id="host" type="text" name="host" value="<%= locals.getServer %>"><br>
+      <b>Port:</b>
+      <input id="port" type="text" name="port" value="<%= locals.getPort %>"><br>
+      <b>Topic:</b>
+      <input id="topic" type="text" name="topic" value="<%= locals.getSubscriberText %>"><br><br>
+      <input type="button" onclick="startConnect()" value="Subscribe">
+      <!--<input type="button" onclick="startDisconnect()" value="Disconnect">-->
+    </form>
+  </div>
+  <div id="messages"></div>
+</div>
+
+<%- include('footer') -%>

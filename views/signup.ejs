@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= locals.title ? title : 'User sign up'  %></title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="text-center center-div" id="signup">
+        <div class="container w-25 border py-5">
+            <div class="title pb-5">
+                <h2 class="font-weight-bold">User sign up</h2>
+                <span>Sign up for the new user</span>
+            </div>
+            <form action="/route/userSignup" method="POST" class="pt-3">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="name" value="name" name="name">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="email" value="sid@gmail.com" name="email">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="phone" value="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" value="12345" placeholder="password">
+                </div>
+                <button type="submit" class="btn btn-success rounded-pill">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
